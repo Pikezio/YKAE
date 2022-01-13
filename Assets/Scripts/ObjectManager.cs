@@ -59,7 +59,7 @@ public class ObjectManager : MonoBehaviour
                 SetTargetObject(hit);
 
                 // If picking up object
-                if (targetObject != null)
+                if (pickedUpObject == null && targetObject != null)
                 {
                     if (Input.GetMouseButtonDown(0) && notOverUI && pickedUpObject == null)
                     {
@@ -158,11 +158,8 @@ public class ObjectManager : MonoBehaviour
 
     void MoveToMouse(Ray ray, RaycastHit hit, GameObject gameObject)
     {
-        if (hit.normal == Vector3.up)
-        {
-            Debug.DrawLine(ray.origin, hit.point, Color.red);
-            gameObject.transform.position = new Vector3(hit.point.x, hit.point.y + gameObject.GetComponent<Collider>().bounds.size.y / 2, hit.point.z);
-        }   
+        Debug.DrawLine(ray.origin, hit.point, Color.red);
+        gameObject.transform.position = new Vector3(hit.point.x, hit.point.y + gameObject.GetComponent<Collider>().bounds.size.y / 2, hit.point.z);
     }
 
     public void SelectObject(int index)
